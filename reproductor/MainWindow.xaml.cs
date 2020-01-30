@@ -43,7 +43,7 @@ namespace reproductor
         public MainWindow()
         {
             InitializeComponent();
-           
+
             btnRerpoducir.IsEnabled = true;
             btnDetener.IsEnabled = false;
             btnPausa.IsEnabled = false;
@@ -51,6 +51,7 @@ namespace reproductor
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += Timer_Tick;
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -63,7 +64,27 @@ namespace reproductor
             }
 
             pbCancion.Value = reader.CurrentTime.TotalSeconds;
-            
+
+
+            if (pbCancion.Value >= 1)
+            {
+                txtLyrics.Text = "In the town where I was born";
+            }
+
+            if (pbCancion.Value >= 6)
+            {
+                txtLyrics.Text = "Lived a man who sailed to sea";
+            }
+
+            if (pbCancion.Value >= 10.5)
+            {
+                txtLyrics.Text = "And he told us of his life";
+            }
+
+            if (pbCancion.Value >= 15)
+            {
+                txtLyrics.Text = "In the land of submarines";
+            }
         }
 
   
@@ -106,7 +127,9 @@ namespace reproductor
                     sldTiempo.Maximum = reader.TotalTime.TotalSeconds;
                     sldTiempo.Value = reader.CurrentTime.TotalSeconds;
 
-                    timer.Start();
+                    pbCancion.Maximum = reader.TotalTime.TotalSeconds;
+
+                timer.Start();
                 
             }
         }

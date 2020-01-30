@@ -16,7 +16,7 @@
                 Thumb.DragStarted="SldTiempo_DragStarted"
                 Thumb.DragCompleted="SldTiempo_DragCompleted"/>
         <ProgressBar x:Name="pbCancion" HorizontalAlignment="Left" Height="42" Margin="78,10,0,0" VerticalAlignment="Top" Width="668"/>
-        <TextBlock x:Name="txtLyrics" HorizontalAlignment="Left" Margin="162,57,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="140" Width="463"/>
+        <TextBlock x:Name="txtLyrics" HorizontalAlignment="Left" Margin="162,57,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="140" Width="463" FontSize="36" TextAlignment="Center"/>
 
 
     </Grid>
