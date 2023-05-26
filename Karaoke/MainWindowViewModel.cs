@@ -98,7 +98,8 @@ internal partial class MainWindowViewModel : ObservableObject
         if (waveOut?.PlaybackState == PlaybackState.Paused) waveOut.Play();
         else
         {
-            reader = new(Settings.Default.SongFile);
+            ManageLyrics.ReadFile(Settings.Default.LyricsFile);
+            reader = new(Settings.Default.MusicFile);
             waveOut = new WaveOut();
             waveOut.Init(reader);
             waveOut.Play();

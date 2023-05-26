@@ -21,6 +21,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Files\yellow-submarine.lrc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\yellow-submarine.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
