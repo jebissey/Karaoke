@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Karaoke"
-        Title="MainWindow" Height="400" Width="800">
+        Title="Karaoke" Height="750" Width="1200" WindowState="Normal" WindowStartupLocation="CenterScreen">
     
     <Window.DataContext>
         <local:MainWindowViewModel />
@@ -15,18 +15,19 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{Binding Lyrics}" Height="300" Width="750" FontSize="36" TextAlignment="Center"/>
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{Binding Lyrics}" Height="400" Width="1100" FontSize="72" TextAlignment="Center"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="⏵" Width="74"  Command="{Binding StartCommand}"/>
-            <Button Content="⏸" Width="74" Command="{Binding PauseCommand}"/>
-            <Button Content="⏹" Width="74" Command="{Binding StopCommand}"/>
+            <Button Content="⏵" Width="74"  Command="{Binding StartCommand}" Visibility="{Binding ButtonsStartVisibility}" FontSize="20"/>
+            <Button Content="⏸" Width="74" Command="{Binding PauseCommand}" Visibility="{Binding ButtonsPauseVisibility}" FontSize="20"/>
+            <Button Content="⏹" Width="74" Command="{Binding StopCommand}" FontSize="20"/>
         </StackPanel>
-        
-        <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{Binding CurrentTime}" />
-        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Text="{Binding TotalTime}" />
-        <Slider Grid.Row="4" HorizontalAlignment="Center" Width="750" Maximum="{Binding SliderMax}" Value="{Binding SliderValue, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{Binding CurrentTime}" FontSize="20"/>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Text="{Binding TotalTime}" FontSize="20"/>
+        <Slider Grid.Row="4" HorizontalAlignment="Center" Width="750" Maximum="{Binding SliderMax}" Value="{Binding SliderValue, Mode=TwoWay}" Margin="10"/>
     </Grid>
 </Window>

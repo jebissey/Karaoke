@@ -6,7 +6,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ApplicationIcon>note.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="note.ico" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -21,6 +25,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Files\elysees_bo.lrc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\elysees_bo.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\yellow-submarine.lrc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Karaoke.Properties;
 using NAudio.Wave;
 using System;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Karaoke;
@@ -21,7 +22,7 @@ internal partial class MainWindowViewModel : ObservableObject
     {
         timer = new DispatcherTimer
         {
-            Interval = TimeSpan.FromMilliseconds(500)
+            Interval = TimeSpan.FromMilliseconds(250)
         };
         timer.Tick += TimerTick;
 
@@ -29,19 +30,14 @@ internal partial class MainWindowViewModel : ObservableObject
         #region Local methods
         void TimerTick(object sender, EventArgs e)
         {
-            CurrentTime = reader.CurrentTime.ToString()[3..8];
-            try
-            {
-                dragging = false;
-                SliderValue = reader.CurrentTime.TotalSeconds;
+            TimeSpan currentTime = reader.CurrentTime;
+            CurrentTime = currentTime.ToString()[3..8];
 
-            }
-            catch { throw; }
-            finally
-            {
-                dragging = true;
-            }
-            Lyrics = ManageLyrics.Get(reader.CurrentTime.TotalSeconds);
+            dragging = false;
+            SliderValue = currentTime.TotalSeconds;
+            dragging = true;
+
+            Lyrics = ManageLyrics.Get(currentTime.TotalSeconds);
         }
         #endregion
     }
@@ -89,6 +85,8 @@ internal partial class MainWindowViewModel : ObservableObject
             }
         }
     }
+    public Visibility ButtonsStartVisibility => WaveOutIsNotPlaying() ? Visibility.Visible : Visibility.Collapsed;
+    public Visibility ButtonsPauseVisibility => WaveOutIsPlaying() ? Visibility.Visible : Visibility.Collapsed;
     #endregion
 
     #region Relay commands
@@ -118,15 +116,15 @@ internal partial class MainWindowViewModel : ObservableObject
     }
     private bool WaveOutIsNotPlaying() => waveOut?.PlaybackState != PlaybackState.Playing;
 
-    [RelayCommand(CanExecute = "WaveOutIPlaying")]
+    [RelayCommand(CanExecute = "WaveOutIsPlaying")]
     private void Pause()
     {
         waveOut?.Pause();
         SetStateButtons();
     }
-    private bool WaveOutIPlaying() => waveOut?.PlaybackState == PlaybackState.Playing;
+    private bool WaveOutIsPlaying() => waveOut?.PlaybackState == PlaybackState.Playing;
 
-    [RelayCommand(CanExecute = "WaveOutIPlaying")]
+    [RelayCommand(CanExecute = "WaveOutIsPlaying")]
     private void Stop()
     {
         waveOut?.Stop();
@@ -145,6 +143,8 @@ internal partial class MainWindowViewModel : ObservableObject
         StartCommand.NotifyCanExecuteChanged();
         PauseCommand.NotifyCanExecuteChanged();
         StopCommand.NotifyCanExecuteChanged();
+        OnPropertyChanged(nameof(ButtonsStartVisibility));
+        OnPropertyChanged(nameof(ButtonsPauseVisibility));
     }
     #endregion
 }

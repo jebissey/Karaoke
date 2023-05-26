@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Globalization;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Karaoke;
@@ -23,7 +23,6 @@ internal static class ManageLyrics
 
     public static void ReadFile(string path)
     {
-
         using (StreamReader sr = new StreamReader(path))
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -34,7 +33,7 @@ internal static class ManageLyrics
                 Match match = Regex.Match(line, pattern);
                 if (match.Success)
                 {
-                    lyricsLines.Add(new LyricsLine() { time = TimeSpan.Parse("0:"+ match.Groups[1].ToString()+"0").TotalSeconds, lyrics = match.Groups[2].ToString() });
+                    lyricsLines.Add(new LyricsLine() { time = TimeSpan.Parse("0:" + match.Groups[1].ToString() + "0").TotalSeconds, lyrics = match.Groups[2].ToString() });
                 }
             }
         }

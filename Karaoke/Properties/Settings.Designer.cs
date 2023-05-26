@@ -25,7 +25,7 @@ namespace Karaoke.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./Files/yellow-submarine.mp3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./Files/elysees_bo.mp3")]
         public string MusicFile {
             get {
                 return ((string)(this["MusicFile"]));
@@ -34,7 +34,7 @@ namespace Karaoke.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./Files/yellow-submarine.lrc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./Files/elysees_bo.lrc")]
         public string LyricsFile {
             get {
                 return ((string)(this["LyricsFile"]));
