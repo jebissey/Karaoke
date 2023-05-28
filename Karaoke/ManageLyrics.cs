@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -11,15 +12,7 @@ internal static class ManageLyrics
 {
     private static List<LyricsLine> lyricsLines = new();
 
-    public static string Get(double time)
-    {
-        string lyrics = "";
-        foreach (var lyricsLine in lyricsLines)
-        {
-            if (time >= lyricsLine.time) lyrics = lyricsLine.lyrics;
-        }
-        return lyrics;
-    }
+    public static string Get(double time) => lyricsLines.Where(x => x.time <= time).OrderByDescending(x => x.time).FirstOrDefault().lyrics ?? "";
 
     public static void ReadFile(string path)
     {

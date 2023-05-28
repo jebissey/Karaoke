@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using Karaoke.Properties;
 using NAudio.Wave;
 using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -44,6 +46,8 @@ internal partial class MainWindowViewModel : ObservableObject
     #endregion
 
     #region Properties
+    public static string Title => $"Karaoke - V{GetSoftVersion()}";
+
     private string lyrics;
     public string Lyrics
     {
@@ -145,6 +149,13 @@ internal partial class MainWindowViewModel : ObservableObject
         StopCommand.NotifyCanExecuteChanged();
         OnPropertyChanged(nameof(ButtonsStartVisibility));
         OnPropertyChanged(nameof(ButtonsPauseVisibility));
+    }
+
+    private static string GetSoftVersion()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+        return fileVersionInfo.FileVersion ?? "";
     }
     #endregion
 }
