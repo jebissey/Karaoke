@@ -34,7 +34,7 @@ namespace Karaoke.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./Files/elysees_bo.lrc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./Files/BNW.lrc")]
         public string LyricsFile {
             get {
                 return ((string)(this["LyricsFile"]));

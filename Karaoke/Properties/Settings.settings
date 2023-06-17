@@ -6,7 +6,7 @@
       <Value Profile="(Default)">./Files/elysees_bo.mp3</Value>
     </Setting>
     <Setting Name="LyricsFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">./Files/elysees_bo.lrc</Value>
+      <Value Profile="(Default)">./Files/BNW.lrc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

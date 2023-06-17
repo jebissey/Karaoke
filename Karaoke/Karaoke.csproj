@@ -6,8 +6,11 @@
     <ApplicationIcon>note.ico</ApplicationIcon>
 	<Description>Simple Karaoke program</Description>
 	<RepositoryUrl>https://github.com/jebissey/Karaoke</RepositoryUrl>
-	<AssemblyVersion>1.0.1</AssemblyVersion>
+	<AssemblyVersion>1.0.2</AssemblyVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Doc\SplashScreen.png" />
+  </ItemGroup>
 	
   <ItemGroup>
     <Content Include="note.ico" />
@@ -19,6 +22,9 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
+    <SplashScreen Include="Doc\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -26,6 +32,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Files\BNW.lrc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\elysees_bo.lrc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
