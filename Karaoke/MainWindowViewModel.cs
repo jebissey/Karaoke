@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
+using static Karaoke.ManageLyrics;
 
 namespace Karaoke;
 
@@ -16,16 +17,13 @@ internal partial class MainWindowViewModel : ObservableObject
     private readonly DispatcherTimer timer;
     private AudioFileReader reader;
     private WaveOut waveOut;
-    private bool dragging = true;
+    private bool draggingSlider = true;
     #endregion
 
     #region Constructor
     public MainWindowViewModel()
     {
-        timer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromMilliseconds(250)
-        };
+        timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
         timer.Tick += TimerTick;
 
 
@@ -35,11 +33,35 @@ internal partial class MainWindowViewModel : ObservableObject
             TimeSpan currentTime = reader.CurrentTime;
             CurrentTime = currentTime.ToString()[3..8];
 
-            dragging = false;
-            SliderValue = currentTime.TotalSeconds;
-            dragging = true;
+            draggingSlider = false;
+            SliderValue = Math.Round(currentTime.TotalSeconds, 0);
+            draggingSlider = true;
 
-            Lyrics = ManageLyrics.Get(currentTime.TotalSeconds);
+            LyricsLine lyricsLine = Get(currentTime.TotalSeconds);
+            Lyrics = lyricsLine.lyrics ?? "";
+            if (lyricsLine.times.Count > 0)
+            {
+                int? start = null, stop = null;
+                foreach (var time in lyricsLine.times)
+                {
+                    if (start == null && currentTime.TotalSeconds < time.time) return;
+                    if (start == null) start = time.location;
+                    else
+                    {
+                        if (currentTime.TotalSeconds <= time.time) stop = time.location;
+                        else start = time.location;
+                    }
+                    if (start != null && stop != null)
+                    {
+                        double max = lyricsLine.lyrics.Length;
+                        GradientStopStart = 1 - (max - start ?? 0) / max;
+                        GradientStopStop = 1 - (max - stop ?? 0) / max;
+                        GradientStopMiddle = gradientStopStart + ((gradientStopStop - gradientStopStart) / 2);
+                        return;
+                    }
+                }
+            }
+            else GradientStopStart = GradientStopMiddle = GradientStopStop = 0;
         }
         #endregion
     }
@@ -82,15 +104,40 @@ internal partial class MainWindowViewModel : ObservableObject
         get => sliderValue;
         set
         {
-            SetProperty(ref sliderValue, value);
-            if (dragging && reader != null && waveOut != null && waveOut.PlaybackState != PlaybackState.Stopped)
+            if (sliderValue != value)
             {
-                reader.CurrentTime = TimeSpan.FromSeconds(sliderValue);
+                SetProperty(ref sliderValue, value);
+                if (draggingSlider && reader != null && waveOut != null && waveOut.PlaybackState != PlaybackState.Stopped)
+                {
+                    reader.CurrentTime = TimeSpan.FromSeconds(sliderValue);
+                }
             }
         }
     }
     public Visibility ButtonsStartVisibility => WaveOutIsNotPlaying() ? Visibility.Visible : Visibility.Collapsed;
     public Visibility ButtonsPauseVisibility => WaveOutIsPlaying() ? Visibility.Visible : Visibility.Collapsed;
+
+
+    private double gradientStopStart;
+    public double GradientStopStart
+    {
+        get => gradientStopStart;
+        set => SetProperty(ref gradientStopStart, value);
+    }
+
+    private double gradientStopMiddle;
+    public double GradientStopMiddle
+    {
+        get => gradientStopMiddle;
+        set => SetProperty(ref gradientStopMiddle, value);
+    }
+
+    private double gradientStopStop;
+    public double GradientStopStop
+    {
+        get => gradientStopStop;
+        set => SetProperty(ref gradientStopStop, value);
+    }
     #endregion
 
     #region Relay commands

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Karaoke"
         Title="{Binding Title}" Height="720" Width="1280" WindowState="Normal" WindowStartupLocation="CenterScreen">
-    
+
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
@@ -11,23 +11,30 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{Binding Lyrics}" Height="400" Width="1280" FontSize="92" TextAlignment="Center"/>
+        <TextBox Grid.Row="0" TextWrapping="Wrap" Text="{Binding Lyrics}" FontSize="92" HorizontalAlignment="Center" BorderThickness="0">
+            <TextBox.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="{Binding GradientStopStart}"/>
+                    <GradientStop Color="Cyan" Offset="{Binding GradientStopMiddle}"/>
+                    <GradientStop Color="White" Offset="{Binding GradientStopStop}"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button Content="⏵" Width="74"  Command="{Binding StartCommand}" Visibility="{Binding ButtonsStartVisibility}" FontSize="20"/>
             <Button Content="⏸" Width="74" Command="{Binding PauseCommand}" Visibility="{Binding ButtonsPauseVisibility}" FontSize="20"/>
             <Button Content="⏹" Width="74" Command="{Binding StopCommand}" FontSize="20"/>
         </StackPanel>
 
-        <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{Binding CurrentTime}" FontSize="20"/>
-        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Text="{Binding TotalTime}" FontSize="20"/>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Left" Text="{Binding CurrentTime}" FontSize="20" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Text="{Binding TotalTime}" FontSize="20" Margin="0,0,10,0"/>
         <Slider Grid.Row="4" HorizontalAlignment="Center" Width="750" Maximum="{Binding SliderMax}" Value="{Binding SliderValue, Mode=TwoWay}" Margin="10"/>
     </Grid>
 </Window>
