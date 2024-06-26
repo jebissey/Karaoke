@@ -1,25 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>note.ico</ApplicationIcon>
-	<Description>Simple Karaoke program</Description>
-	<RepositoryUrl>https://github.com/jebissey/Karaoke</RepositoryUrl>
-	<AssemblyVersion>1.1</AssemblyVersion>
+    <Description>Simple Karaoke program</Description>
+    <RepositoryUrl>https://github.com/jebissey/Karaoke</RepositoryUrl>
+    <AssemblyVersion>1.1</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Doc\SplashScreen.png" />
   </ItemGroup>
-	
   <ItemGroup>
     <Content Include="note.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="NAudio" Version="2.1.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Doc\SplashScreen.png" />
