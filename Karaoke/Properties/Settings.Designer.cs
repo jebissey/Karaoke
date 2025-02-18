@@ -12,7 +12,7 @@ namespace Karaoke.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace Karaoke.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./Files/elysees_bo.mp3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./Files/les-corons.mp3")]
         public string MusicFile {
             get {
                 return ((string)(this["MusicFile"]));
@@ -34,7 +34,7 @@ namespace Karaoke.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./Files/BNW.lrc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./Files/les-corons.lrc")]
         public string LyricsFile {
             get {
                 return ((string)(this["LyricsFile"]));

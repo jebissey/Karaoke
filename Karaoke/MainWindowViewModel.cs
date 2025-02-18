@@ -18,6 +18,7 @@ internal partial class MainWindowViewModel : ObservableObject
     private AudioFileReader reader;
     private WaveOut waveOut;
     private bool draggingSlider = true;
+    private LyricsLine? lastLyricsLine;
     #endregion
 
     #region Constructor
@@ -38,11 +39,14 @@ internal partial class MainWindowViewModel : ObservableObject
             draggingSlider = true;
 
             LyricsLine lyricsLine = Get(currentTime.TotalSeconds);
+            if (TheSame(lastLyricsLine ?? new(), lyricsLine)) GradientStopStart = GradientStopMiddle = GradientStopStop = 0;
+            lastLyricsLine = lyricsLine;
+
             Lyrics = lyricsLine.lyrics ?? "";
             if (lyricsLine.times.Count > 0)
             {
                 int? start = null, stop = null;
-                foreach (var time in lyricsLine.times)
+                foreach (LyricsLine.InLyricsLine time in lyricsLine.times)
                 {
                     if (start == null && currentTime.TotalSeconds < time.time) return;
                     if (start == null) start = time.location;
