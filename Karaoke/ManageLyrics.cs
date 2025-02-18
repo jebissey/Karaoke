@@ -54,6 +54,8 @@ internal static class ManageLyrics
         #endregion
     }
 
+    public static bool TheSame(LyricsLine lyricsLine1, LyricsLine lyricsLine2) => lyricsLine1.lyrics == lyricsLine2.lyrics;
+
     internal struct LyricsLine
     {
         public double time;
