@@ -27,6 +27,9 @@
             </TextBox.Background>
         </TextBox>
 
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <ComboBox ItemsSource="{Binding Songs}" SelectedItem="{Binding Song}"/>
+        </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button Content="⏵" Width="74"  Command="{Binding StartCommand}" Visibility="{Binding ButtonsStartVisibility}" FontSize="20"/>
             <Button Content="⏸" Width="74" Command="{Binding PauseCommand}" Visibility="{Binding ButtonsPauseVisibility}" FontSize="20"/>

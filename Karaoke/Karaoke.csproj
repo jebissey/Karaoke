@@ -6,7 +6,7 @@
     <ApplicationIcon>note.ico</ApplicationIcon>
     <Description>Simple Karaoke program</Description>
     <RepositoryUrl>https://github.com/jebissey/Karaoke</RepositoryUrl>
-    <AssemblyVersion>1.2</AssemblyVersion>
+    <AssemblyVersion>1.3</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Doc\SplashScreen.png" />
@@ -15,9 +15,9 @@
     <Content Include="note.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="NAudio" Version="2.1.0" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Doc\SplashScreen.png" />
