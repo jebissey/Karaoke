@@ -11,7 +11,7 @@ namespace Karaoke;
 
 internal static class ManageLyrics
 {
-    private static readonly List<LyricsLine> lyricsLines = new();
+    private static List<LyricsLine> lyricsLines = [];
     private const string lyricsLinePattern = @"^\[(\d{0,2}:\d{0,2}.\d{0,2})\](.*)";
     private const string inLyricsLinePattern = @"<(\d{0,2}:\d{0,2}.\d{0,2})\>";
     private const int lyricsLengthPattern = 10;
@@ -20,6 +20,7 @@ internal static class ManageLyrics
 
     public static void ReadFile(string path)
     {
+        lyricsLines.Clear();
         using StreamReader sr = new(path);
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
         string line;
@@ -68,4 +69,6 @@ internal static class ManageLyrics
             public int location;
         }
     }
+
+    public static List<string> GetAvailableSongs() => ["Aux BNW", "Les corons"];
 }
