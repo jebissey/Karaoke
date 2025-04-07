@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Doc\SplashScreen.png" />
   </ItemGroup>
+	
   <ItemGroup>
     <Content Include="note.ico" />
   </ItemGroup>
@@ -37,12 +38,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Files\elysees_bo.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Files\les-corons.lrc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Files\les-corons.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Files\yellow-submarine.lrc">
