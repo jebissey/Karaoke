@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Karaoke.Properties;
 using NAudio.Wave;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
@@ -18,6 +19,10 @@ internal partial class MainWindowViewModel : ObservableObject
     private AudioFileReader reader;
     private WaveOut waveOut;
     private bool draggingSlider = true;
+    private LyricsLine? lastLyricsLine;
+
+    private string musicFile = Settings.Default.MusicFile;
+    private string lyricsFile = Settings.Default.LyricsFile;
     #endregion
 
     #region Constructor
@@ -38,11 +43,14 @@ internal partial class MainWindowViewModel : ObservableObject
             draggingSlider = true;
 
             LyricsLine lyricsLine = Get(currentTime.TotalSeconds);
+            if (TheSame(lastLyricsLine ?? new(), lyricsLine)) GradientStopStart = GradientStopMiddle = GradientStopStop = 0;
+            lastLyricsLine = lyricsLine;
+
             Lyrics = lyricsLine.lyrics ?? "";
             if (lyricsLine.times.Count > 0)
             {
                 int? start = null, stop = null;
-                foreach (var time in lyricsLine.times)
+                foreach (LyricsLine.InLyricsLine time in lyricsLine.times)
                 {
                     if (start == null && currentTime.TotalSeconds < time.time) return;
                     if (start == null) start = time.location;
@@ -138,6 +146,32 @@ internal partial class MainWindowViewModel : ObservableObject
         get => gradientStopStop;
         set => SetProperty(ref gradientStopStop, value);
     }
+
+    public List<string> Songs => GetAvailableSongs();
+    private string song;
+    public string Song
+    {
+        get => song;
+        set
+        {
+            SetProperty(ref song, value);
+            switch (song)
+            {
+                case "Aux BNW":
+                    musicFile = "./Files/elysees_bo.mp3";
+                    lyricsFile = "./Files/BNW.lrc";
+                    break;
+                case "Les corons":
+                    musicFile = "./Files/les-corons.mp3";
+                    lyricsFile = "./Files/les-corons.lrc";
+                    break;
+                default:
+                    throw new ArgumentException("Invalid song");
+            }
+            Stop();
+            Start();
+        }
+    }
     #endregion
 
     #region Relay commands
@@ -147,8 +181,8 @@ internal partial class MainWindowViewModel : ObservableObject
         if (waveOut?.PlaybackState == PlaybackState.Paused) waveOut.Play();
         else
         {
-            ManageLyrics.ReadFile(Settings.Default.LyricsFile);
-            reader = new(Settings.Default.MusicFile);
+            ReadFile(lyricsFile);
+            reader = new(musicFile);
             waveOut = new WaveOut();
             waveOut.Init(reader);
             waveOut.Play();
@@ -181,8 +215,8 @@ internal partial class MainWindowViewModel : ObservableObject
         waveOut?.Stop();
 
         timer.Stop();
-        waveOut.Dispose();
-        reader.Dispose();
+        waveOut?.Dispose();
+        reader?.Dispose();
 
         SetStateButtons();
     }

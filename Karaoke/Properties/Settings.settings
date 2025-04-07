@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="MusicFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">./Files/elysees_bo.mp3</Value>
+      <Value Profile="(Default)">./Files/les-corons.mp3</Value>
     </Setting>
     <Setting Name="LyricsFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">./Files/BNW.lrc</Value>
+      <Value Profile="(Default)">./Files/les-corons.lrc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

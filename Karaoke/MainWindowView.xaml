@@ -17,7 +17,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0" TextWrapping="Wrap" Text="{Binding Lyrics}" FontSize="92" HorizontalAlignment="Center" BorderThickness="0">
+        <TextBox Grid.Row="0" TextWrapping="Wrap" Text="{Binding Lyrics}" FontSize="120" HorizontalAlignment="Center" BorderThickness="0">
             <TextBox.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="White" Offset="{Binding GradientStopStart}"/>
@@ -27,6 +27,9 @@
             </TextBox.Background>
         </TextBox>
 
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <ComboBox ItemsSource="{Binding Songs}" SelectedItem="{Binding Song}"/>
+        </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button Content="⏵" Width="74"  Command="{Binding StartCommand}" Visibility="{Binding ButtonsStartVisibility}" FontSize="20"/>
             <Button Content="⏸" Width="74" Command="{Binding PauseCommand}" Visibility="{Binding ButtonsPauseVisibility}" FontSize="20"/>
